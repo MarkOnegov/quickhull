@@ -16,8 +16,29 @@
         <button id="animate-button">Анимировать</button>
         <button id="random-button">Задать случайно</button>
       </div>
+      <div class="buttons">
+        <button id="issue-button">Сообщить об ошибке построения</button>
+      </div>
     </div>
-
+    <div id="issue-popup" class="popup">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Сообщить о проблеме</h3>
+        <p>
+          Для сообщения о проблеме создайте issue и предоставьте набор точек,
+          для которго некорректно построилась оболочка
+        </p>
+        <p>Набор точек:</p>
+        <textarea id="points-output" readonly></textarea>
+        <div class="link-container">
+          <a
+            href="https://github.com/MarkOnegov/quickhull/issues/new?assignees=MarkOnegov&labels=bug&template=---------------------.md&title=BUG"
+            target="_blank"
+            >Создать Issue</a
+          >
+        </div>
+      </div>
+    </div>
     <script src="./bundle.js"></script>
   </body>
 </html>

@@ -6,7 +6,74 @@
   color: #333;
   font-family: 'Roboto', sans-serif;
 }
-.main {
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.popup {
+  display: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.popup .content {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 200ms ease;
+}
+
+.popup h3 {
+  text-align: center;
+}
+
+.popup .link-container {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+.popup.active {
+  display: block;
+}
+
+.popup.active.show {
+  opacity: 1;
+}
+.popup.active.show .content {
+  top: 50%;
+}
+
+.popup .overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.popup .content {
+  width: 300px;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#points-output {
+  resize: none;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.main,
+.popup .link-container a {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,7 +85,8 @@ canvas {
   border-radius: 10px;
 }
 
-button {
+button,
+.popup .link-container a {
   color: #fafafa;
   background-color: #2ca1db;
   border: 2px solid #2ca1db;
@@ -34,14 +102,24 @@ button {
   transition: border 200ms ease;
 }
 
-button:hover {
+button:hover,
+.popup .link-container a {
   background-color: #169adb;
 }
 
-button:focus-visible {
+button:focus-visible,
+.popup .link-container a {
   border: 2px solid #169adb;
 }
 
 button:disabled {
   background-color: #888;
+}
+
+.buttons {
+  margin-top: 5px;
+}
+
+#issue-button {
+  width: 100%;
 }

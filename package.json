@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/ts/main.ts",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "start": "webpack --watch"
   },
   "author": "Onegov Mark <markyha2012@icloud.com>",

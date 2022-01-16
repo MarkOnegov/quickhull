@@ -5,7 +5,8 @@
   "main": "src/ts/main.ts",
   "scripts": {
     "build": "webpack --mode=production",
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "publish": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "Onegov Mark <markyha2012@icloud.com>",
   "license": "ISC",

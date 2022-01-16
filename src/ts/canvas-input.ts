@@ -11,13 +11,10 @@ export default class CanvasInput {
 
   private disabled = false;
 
-  private width: number;
-
-  private height: number;
+  private canvas: HTMLCanvasElement;
 
   constructor(canvas: HTMLCanvasElement, random: HTMLButtonElement) {
-    this.width = canvas.width;
-    this.height = canvas.height;
+    this.canvas = canvas;
     this.points$ = new Observable<Point[]>((sub) => {
       if (this.disabled) {
         return;
@@ -32,7 +29,6 @@ export default class CanvasInput {
       });
     });
     this.disabled$.subscribe((disabled) => {
-      console.log(disabled);
       this.disabled = disabled;
       // eslint-disable-next-line no-param-reassign
       random.disabled = disabled;
@@ -56,7 +52,10 @@ export default class CanvasInput {
     this.points = [];
     for (let i = Math.random() * 50; i > 0; i -= 1) {
       this.points.push(
-        new Point(this.width * Math.random(), this.height * Math.random()),
+        new Point(
+          Math.trunc((this.canvas.width - 20) * Math.random() + 10),
+          Math.trunc((this.canvas.height - 20) * Math.random() + 10),
+        ),
       );
     }
   }

@@ -1,35 +1,27 @@
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import MyMath from './math';
 import Point from './point';
 
 export default class CanvasInput {
-  points$: Observable<Point[]>;
+  points$: Subject<Point[]> = new Subject<Point[]>();
 
   disabled$: Subject<boolean> = new Subject<boolean>();
 
   private points: Point[] = [];
 
-  private disabled = false;
-
   private canvas: HTMLCanvasElement;
 
   constructor(canvas: HTMLCanvasElement, random: HTMLButtonElement) {
     this.canvas = canvas;
-    this.points$ = new Observable<Point[]>((sub) => {
-      if (this.disabled) {
-        return;
-      }
-      fromEvent(canvas, 'click').subscribe((event) => {
-        this.clickHandler(event as MouseEvent);
-        sub.next(this.points);
-      });
-      fromEvent(random, 'click').subscribe(() => {
-        this.generateRandom();
-        sub.next(this.points);
-      });
+    fromEvent(canvas, 'click').subscribe((event) => {
+      this.clickHandler(event as MouseEvent);
+      this.points$.next([...this.points]);
+    });
+    fromEvent(random, 'click').subscribe(() => {
+      this.generateRandom();
+      this.points$.next([...this.points]);
     });
     this.disabled$.subscribe((disabled) => {
-      this.disabled = disabled;
       // eslint-disable-next-line no-param-reassign
       random.disabled = disabled;
     });

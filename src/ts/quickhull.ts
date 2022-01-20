@@ -43,7 +43,6 @@ export default class Quickhull {
     this.disable$ = disable$;
     points.subscribe((ps) => {
       this.findHull(ps);
-      this.points = ps;
     });
   }
 

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Быстрая оболочка</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="node_modules/@shower/ribbon/styles/styles.css"
+    />
+    <style>
+      .shower {
+        --slide-ratio: calc(16 / 9);
+      }
+    </style>
+  </head>
+  <body class="shower list">
+    <header class="caption">
+      <h1>Быстрая оболочка</h1>
+      <p>Онегов Марк</p>
+    </header>
+
+    <section class="slide" id="cover">
+      <h2>Quickhull</h2>
+      <p>Джонатан Скотт Гринфилд</p>
+      <p>1990</p>
+
+      <figure>
+        <picture>
+          <source srcset="image/cover.webp" type="image/webp" />
+          <img
+            class="cover"
+            src="image/cover.jpg"
+            alt="Мыслитель задумался у компьютера"
+          />
+        </picture>
+      </figure>
+      <style>
+        #cover h2,
+        #cover p {
+          background-color: rgb(204, 0, 0);
+          color: white;
+          margin: 0;
+          width: fit-content;
+          float: right;
+          clear: both;
+          padding: 10px;
+          margin-right: 70px;
+        }
+        #cover p {
+          line-height: normal;
+          text-align: end;
+          font-weight: bold;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>Quickhull</h2>
+      <p>
+        Алгоритм построения выпуклой оболочки на плоскости, использующий идею
+        быстрой сортировки Хоара (QuickSort).
+      </p>
+    </section>
+
+    <section class="slide" id="alg_1">
+      <h2>Алгоритм</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <g>
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <circle cx="15" cy="10" r="3" />
+          <circle cx="25" cy="90" r="3" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="3" />
+          <circle cx="25" cy="90" r="3" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <line class="subline" x1="23.4" y1="77.1" x2="40" y2="75" />
+          <line class="subline" x1="19.9" y1="49.4" x2="55" y2="45" />
+          <line class="subline" x1="15.9" y1="17.4" x2="35" y2="15" />
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <line class="subline selected" x1="19.9" y1="49.4" x2="55" y2="45" />
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <line class="main" x1="15" y1="10" x2="55" y2="45" />
+          <line class="main" x1="25" y1="90" x2="55" y2="45" />
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <line class="subline selected" x1="28.8" y1="22.1" x2="35" y2="15" />
+          <line class="main" x1="15" y1="10" x2="55" y2="45" />
+          <line class="main" x1="25" y1="90" x2="55" y2="45" />
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next">
+          <line class="main" x1="15" y1="10" x2="35" y2="15" />
+          <line class="main" x1="35" y1="15" x2="55" y2="45" />
+          <line class="main" x1="25" y1="90" x2="55" y2="45" />
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+        <g class="next last">
+          <line class="main" x1="15" y1="10" x2="35" y2="15" />
+          <line class="main" x1="35" y1="15" x2="55" y2="45" />
+          <line class="main" x1="40" y1="75" x2="55" y2="45" />
+          <line class="main" x1="25" y1="90" x2="40" y2="75" />
+          <line class="main" x1="15" y1="10" x2="25" y2="90" />
+          <circle cx="15" cy="10" r="2" />
+          <circle cx="25" cy="90" r="2" />
+          <circle cx="35" cy="15" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="40" cy="75" r="2" />
+        </g>
+      </svg>
+      <style>
+        circle {
+          fill: blue;
+        }
+        line.main {
+          stroke: red;
+        }
+        text {
+          font-size: 0.75em;
+          fill: blue;
+        }
+        line.subline {
+          stroke: green;
+          stroke-width: 0.5;
+        }
+        #alg_1 line.subline.selected {
+          stroke-width: 1;
+        }
+        #alg_1 .visited:not(.last),
+        .visited .hide-visited,
+        .visited.hide-visited {
+          display: none;
+        }
+      </style>
+    </section>
+
+    <section class="slide" id="alg_2">
+      <h2>Алгоритм</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 300 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <g class="first">
+          <line class="main" x1="55" y1="95" x2="15" y2="05" />
+          <circle cx="15" cy="45" r="2" />
+          <circle cx="45" cy="85" r="2" />
+          <circle cx="05" cy="65" r="2" />
+          <circle cx="05" cy="45" r="2" />
+          <circle cx="55" cy="95" r="2" />
+          <circle cx="85" cy="35" r="2" />
+          <circle cx="55" cy="55" r="2" />
+          <circle cx="55" cy="45" r="2" />
+          <circle cx="75" cy="45" r="2" />
+          <circle cx="15" cy="05" r="2" />
+        </g>
+        <g class="next">
+          <line class="math" x1="105" y1="50" x2="115" y2="50" />
+          <line class="math" x1="105" y1="54" x2="115" y2="54" />
+          <line class="math" x1="105" y1="46" x2="115" y2="46" />
+          <line class="math" x1="200" y1="50" x2="210" y2="50" />
+          <line class="math" x1="205" y1="45" x2="205" y2="55" />
+          <line class="main" x1="190" y1="95" x2="150" y2="05" />
+          <line class="main" x1="255" y1="95" x2="215" y2="05" />
+          <circle cx="150" cy="45" r="2" />
+          <circle cx="180" cy="85" r="2" />
+          <circle cx="140" cy="65" r="2" />
+          <circle cx="140" cy="45" r="2" />
+          <circle cx="190" cy="95" r="2" />
+          <circle cx="255" cy="95" r="2" />
+          <circle cx="285" cy="35" r="2" />
+          <circle cx="255" cy="55" r="2" />
+          <circle cx="255" cy="45" r="2" />
+          <circle cx="275" cy="45" r="2" />
+          <circle cx="150" cy="05" r="2" />
+          <circle cx="215" cy="05" r="2" />
+        </g>
+      </svg>
+      <style>
+        #alg_2 line.math {
+          stroke-width: 2;
+          stroke: black;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>Алгоритм</h2>
+      <pre><code>InputSet(<b>S</b>); <span class="comment">// Вводим точки</span>
+Select(p, q, <b>S</b>); <span class="comment">// Выбираем мин. и мак. точки</span>
+Split(p, q, <b>S</b>, <b>R</b>, <b>L</b>); <span class="comment">// Разбиваем точки на две группы</span>
+OutputPoint(p); <span class="comment">// Выводим точку p</span>
+QuickHull(p, q, <b>R</b>); <span class="comment">// Выполняем алгоритм для правых точек</span>
+OutputPoint(q); <span class="comment">// Выводим точку q</span>
+QuickHull(q, p, <b>L</b>); <span class="comment">// Выполняем алгоритм для левых точек</span></code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>
+        <code>Select(p, q, <b>S</b>)</code>
+      </h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <text x="2" y="17">p</text>
+        <text x="58" y="92">q</text>
+        <circle cx="15" cy="45" r="2" />
+        <circle cx="45" cy="85" r="2" />
+        <circle cx="05" cy="65" r="2" />
+        <circle cx="05" cy="45" r="2" />
+        <circle cx="55" cy="95" r="3" />
+        <circle cx="85" cy="35" r="2" />
+        <circle cx="55" cy="55" r="2" />
+        <circle cx="55" cy="45" r="2" />
+        <circle cx="75" cy="45" r="2" />
+        <circle cx="15" cy="05" r="3" />
+      </svg>
+    </section>
+
+    <section class="slide">
+      <h2>
+        <code>
+          Split(p, q, <b>S</b>, <b class="r">R</b>, <b class="l">L</b>)
+        </code>
+      </h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <line class="main" x1="55" y1="95" x2="15" y2="5" />
+        <text x="2" y="17">p</text>
+        <text x="58" y="92">q</text>
+        <circle class="l" cx="15" cy="45" r="2" />
+        <circle class="l" cx="45" cy="85" r="2" />
+        <circle class="l" cx="05" cy="65" r="2" />
+        <circle class="l" cx="05" cy="45" r="2" />
+        <circle cx="55" cy="95" r="3" />
+        <circle class="r" cx="85" cy="35" r="2" />
+        <circle class="r" cx="55" cy="55" r="2" />
+        <circle class="r" cx="55" cy="45" r="2" />
+        <circle class="r" cx="75" cy="45" r="2" />
+        <circle cx="15" cy="05" r="3" />
+      </svg>
+      <style>
+        .r {
+          fill: orange;
+          color: orange;
+        }
+        .l {
+          fill: green;
+          color: green;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>
+        <code>QuickHull(p, q, <b>S</b>)</code>
+      </h2>
+      <pre><code style="line-height: 1.25; font-size: 23px;"><b>if not</b> Empty(<b>S</b>) <b>then begin</b> <span class="comment">// Если <b>S</b> не пусто</span>
+  <span class="comment">// Находим самую удалённую точку</span>
+  r := FarthestPoint(p, q, <b>S</b>);
+  <span class="comment">// Отбрасываел лишнее и выбираем то,
+  // что осталось за границами</span>
+  PruneAndSplit(p, q, r, <b>S</b>, <b>U</b>, <b>L</b>);
+  <span class="comment">// Рекурсивный вызов для <b>U</b></span>
+  QuickHull(p, q, <b>U</b>);
+  <span class="comment">// Выводим точку r</span>
+  OutputPoint(r);
+  <span class="comment">// Рекурсивный вызов для <b>L</b></span>
+  QuickHull(p, q, <b>L</b>);
+<b>end;</b></code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>
+        <code style="font-size: 0.9em">
+          PruneAndSplit(p,q,r,<b>S</b>,<b>U</b>,<b>L</b>)
+        </code>
+      </h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <text x="10" y="10">p</text>
+        <text x="25" y="92">q</text>
+        <text x="55" y="45">r</text>
+        <text class="bold" x="40" y="15">U</text>
+        <text class="bold" x="75" y="92">L</text>
+        <line class="main" x1="-35" y1="-51" x2="85" y2="153"></line>
+        <line class="main" x1="-60" y1="-1" x2="135" y2="53"></line>
+        <line class="main" x1="20" y1="135" x2="95" y2="-15"></line>
+        <circle cx="5" cy="17" r="2" />
+        <circle cx="45" cy="85" r="2" />
+        <circle cx="70" cy="35" r="1.5" />
+      </svg>
+      <style>
+        .bold {
+          font-weight: bold;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>Доказательство корректности</h2>
+      <ol class="theorem">
+        <li class="next">Алгоритм выводит только первичные точки оболочки.</li>
+        <li class="next">Алгоритм выводит все первичные точки оболочки.</li>
+        <li class="next">
+          Алгоритм выводит первичные точки оболочки в правильном порядке.
+        </li>
+      </ol>
+      <style>
+        ol.theorem {
+          list-style-type: none;
+          counter-reset: elementcounter;
+          padding-left: 0;
+        }
+
+        ol.theorem > li:before {
+          content: 'Теорема ' counter(elementcounter) ': ';
+          counter-increment: elementcounter;
+          width: 5em;
+          transform: none;
+          position: static;
+          font-style: italic;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>Теорема 1</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <line class="main" x1="80" y1="0" x2="80" y2="100"></line>
+        <circle cx="80" cy="15" r="2" />
+        <circle cx="80" cy="27" r="2" />
+        <circle cx="80" cy="45" r="2" />
+        <circle cx="80" cy="57" r="2" />
+        <circle cx="80" cy="68" r="2" />
+        <circle cx="80" cy="75" r="2" />
+        <circle cx="80" cy="88" r="2" />
+        <circle cx="15" cy="60" r="2" />
+        <circle cx="33" cy="16" r="2" />
+        <circle cx="67" cy="40" r="2" />
+        <circle cx="25" cy="25" r="2" />
+        <circle cx="70" cy="25" r="2" />
+        <circle cx="30" cy="77" r="2" />
+        <circle cx="17" cy="80" r="2" />
+      </svg>
+    </section>
+
+    <section class="slide">
+      <h2>Непротиворечивые утверждения</h2>
+      <ol class="invariant">
+        <li class="next">p и q — первичные точки оболочки</li>
+        <li class="next">
+          <b>R</b> — подмножество <b>S</b>, расположенное правее прямой pq
+        </li>
+        <li class="next"><b>S\R</b> лежит левее прямой pq</li>
+      </ol>
+      <style>
+        ol.invariant {
+          list-style-type: none;
+          counter-reset: elementcounter;
+          padding-left: 0;
+        }
+        ol.invariant > li:before {
+          content: counter(elementcounter) ') ';
+          counter-increment: elementcounter;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>Доказательство</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="width: 100%; height: calc(100% / var(--slide-ratio))"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <text x="30" y="20">p</text>
+        <text x="30" y="97">q</text>
+        <text x="80" y="67">r</text>
+        <line class="main" x1="40" y1="15" x2="40" y2="85"></line>
+        <line class="main" x1="80" y1="0" x2="80" y2="100"></line>
+        <circle class="l" cx="15" cy="60" r="2" />
+        <circle cx="40" cy="15" r="2" />
+        <circle class="r" cx="67" cy="40" r="2" />
+        <circle class="l" cx="25" cy="25" r="2" />
+        <circle class="r" cx="70" cy="25" r="2" />
+        <circle class="r" cx="80" cy="60" r="2" />
+        <circle class="l" cx="13" cy="77" r="2" />
+        <circle cx="40" cy="85" r="2" />
+      </svg>
+    </section>
+
+    <section class="slide">
+      <h2>Доказательство</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 100 100"
+        style="
+          width: 100%;
+          height: calc(100% / var(--slide-ratio));
+          font-size: 0.75em;
+        "
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <g class="next active">
+          <text x="65" y="55">r</text>
+          <text x="18" y="34">p</text>
+          <text x="18" y="93">q</text>
+          <line
+            class="main hide-visited"
+            x1="15"
+            y1="20"
+            x2="65"
+            y2="40"
+          ></line>
+          <line
+            class="main hide-visited"
+            x1="65"
+            y1="40"
+            x2="15"
+            y2="85"
+          ></line>
+          <line
+            class="main hide-visited"
+            x1="15"
+            y1="85"
+            x2="15"
+            y2="20"
+          ></line>
+          <circle cx="15" cy="20" r="2" />
+          <circle cx="65" cy="40" r="2" />
+          <circle cx="15" cy="85" r="2" />
+        </g>
+        <g class="next">
+          <line class="subline" x1="-35" y1="0" x2="115" y2="60"></line>
+          <line class="subline" x1="15" y1="0" x2="15" y2="100"></line>
+          <circle cx="15" cy="20" r="2" />
+          <circle cx="65" cy="40" r="2" />
+          <circle cx="15" cy="85" r="2" />
+        </g>
+        <g class="next">
+          <text x="30" y="55" class="bold hide-visited">R-U</text>
+          <text x="35" y="20" class="bold hide-visited">U</text>
+          <text x="-10" y="55" class="bold hide-visited">S-R</text>
+          <text x="-5" y="10" class="bold hide-visited">E</text>
+        </g>
+        <g class="next">
+          <circle cx="10" cy="10" r="2" />
+          <text x="2" y="7">e</text>
+          <text x="30" y="55" class="bold hide-visited">R-U</text>
+          <text x="35" y="20" class="bold hide-visited">U</text>
+          <text x="-10" y="55" class="bold hide-visited">S-R</text>
+          <text x="-5" y="10" class="bold hide-visited">E</text>
+        </g>
+        <g class="next">
+          <line class="main" x1="10" y1="10" x2="65" y2="40"></line>
+          <line class="main" x1="65" y1="40" x2="15" y2="85"></line>
+          <line class="main" x1="15" y1="85" x2="10" y2="10"></line>
+        </g>
+      </svg>
+      <style></style>
+    </section>
+
+    <section class="slide">
+      <h2>Доказательство Теоремы 2</h2>
+      <ol class="invariant">
+        <li class="next">
+          При каждом вызове <code>QuickHull(p, q, <b>S</b>)</code> из
+          <b>S</b> удаляются точки.
+          <ul>
+            <li class="next">Выводится первичная точка оболочки</li>
+            <li class="next">Отбрасывается внутренняя точка</li>
+          </ul>
+        </li>
+        <li class="next">
+          Рекурсивный вызов закончиться, тогда и только тогда, когда закончаться
+          точки в <b>S</b>
+        </li>
+      </ol>
+    </section>
+
+    <section class="slide" id="theorem_3">
+      <h2>Доказательство Теоремы 3</h2>
+      <p>
+        <code>QuickHull (p, q, <b>R</b>)</code> выводит первичные точки оболочки
+        в правильном порядке.
+      </p>
+      <p class="next"><i>База индукции:</i> |<b>R</b>| = 0</p>
+      <p class="next"><i>Индуктивный переход:</i> |<b>R</b>| = n+1</p>
+      <p class="next">
+        Выбираем первичную точку r и делаем два рекурсивных вызова
+        <code>QuickHull&nbsp;(p,&nbsp;q,&nbsp;<b>U</b>)</code>&nbsp;и
+        <code>QuickHull&nbsp;(p,&nbsp;q,&nbsp;<b>L</b>)</code>, где
+        |<b>U</b>|,&nbsp;|<b>L</b>|&nbsp;⩽&nbsp;n
+      </p>
+      <p class="next">
+        Выодим r между рекурсивными вызовами, чтобы сохранить порядок
+      </p>
+      <style>
+        #theorem_3 p {
+          margin: 0;
+        }
+      </style>
+    </section>
+
+    <section class="slide">
+      <h2>Доказательство Теоремы 3</h2>
+      <p class="next">
+        Так как <code>QuickHull (p, q, <b>R</b>)</code> выводит первичные точки
+        в правильном порядке, то и весь алгоритм построения оболочки выведет все
+        первичные точки в правильном порядкею
+      </p>
+    </section>
+
+    <section class="slide">
+      <h2>Время выполнения</h2>
+      <ol class="invariant">
+        <li class="next">Худщий случай — O(n<sup>2</sup>)</li>
+        <li class="next">Лучший (ожидаемый) случай — O(n log n)</li>
+        <li class="next">Лучший (ожидаемый) случай — O(n log n)</li>
+      </ol>
+    </section>
+
+    <footer class="badge">
+      <a href="https://github.com/MarkOnegov/quickhull" target="_blank">
+        Source code on GitHub
+      </a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+  </body>
+</html>
